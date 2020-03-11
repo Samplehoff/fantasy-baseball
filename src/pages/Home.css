@@ -1,5 +1,5 @@
 .background-image {
-    background-image: image("/public/pic/baseball-field.jpg");
+    background-image: url("https://media.9news.com/assets/KUSA/images/06d2856a-197e-44b2-868c-2460a1d4d3a6/06d2856a-197e-44b2-868c-2460a1d4d3a6_1140x641.jpg");
     background-color: #cccccc;
     height: 850px;
     background-position: center;
@@ -7,4 +7,8 @@
     background-size: cover;
     
     
+}
+
+.login {
+    align-items: center;
 }

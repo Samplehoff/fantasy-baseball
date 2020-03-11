@@ -1,5 +1,6 @@
 import React from 'react';
 import {Navbar, Nav} from 'react-bootstrap'
+//import Login from './pages/Login'
 //import './Header.css';
 
 class Header extends React.Component {
@@ -15,6 +16,7 @@ class Header extends React.Component {
                                 <Nav.Link href="/teams">Teams</Nav.Link>
                                 <Nav.Link href="/stadiums">Stadiums</Nav.Link>
                             </Nav>
+                            
                             {/* <Form inline>
                                 <FormControl type="text" placeholder="Search" className="mr-sm-2" />
                                 <Button variant="outline-info">Search</Button>
