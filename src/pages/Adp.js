@@ -1,32 +1,31 @@
 import React from 'react';
 import {Table} from 'react-bootstrap'
+import './Adp.css'
 
 
-
-class Stats extends React.Component{
+class Adp extends React.Component{
     constructor(props){
         super(props);
         this.state = {
             error: null,
             isLoaded: false,
-            items: [],
-            players: []
+            items: []
         }
     }
 
     componentDidMount() {
-        this.functionStats();
+        this.functionAdp();
     }
 
-    findStats = () => {
+    findTeams = () => {
         this.setState({
             isLoaded: false
         })
-        this.functionStats()
+        this.functionAdp()
     }
 
-    functionStats() {
-        fetch("https://api.sportsdata.io/v3/mlb/stats/json/PlayerSeasonStats/2019?key=5934312643214e288126a5db02650611")
+    functionAdp() {
+        fetch("https://api.sportsdata.io/v3/mlb/projections/json/PlayerSeasonProjectionStats/2020?key=5934312643214e288126a5db02650611")
         .then(res => res.json())
         .then(
             (info) => {
@@ -43,69 +42,43 @@ class Stats extends React.Component{
                     error
                 })
             }
-        ).then(
-            fetch("https://api.sportsdata.io/v3/mlb/scores/json/Players?key=5934312643214e288126a5db02650611")
-            .then(res => res.json())
-            .then(
-                (pics) => {
-                    console.log(pics)
-                    this.setState({
-                        isLoaded: true,
-                        players: pics
-                    })
-                } 
-            )
         )
     }
 
     render() {
-        const {error, isLoaded, items, players} = this.state;
-        items.map(item => {
-            let playerId = item.PlayerID;
-            let myplayer = players.find(element => element.PlayerID === playerId)
-            console.log(Object.keys(playerId))
-        })
-        return <div>Hello</div>
-        
-    }
-
-    render2() {
-        const {error, isLoaded, items, players} = this.state;
-        let myplayer = players.find(element => element.PlayerID === 10000001)
-        //console.log(myplayer.PhotoUrl)
-        console.log(myplayer)
-        
-        console.log(players)
-        console.log(items)  
+        const {error, isLoaded, items} = this.state;
+            
         if(error) {
             return <div>Error...</div>
         }else if(!isLoaded) {
             return <div>Loading...</div>
         }else {
             return (
-                <div>
-                    <div>
-                    <p>{JSON.stringify(myplayer)}</p>
-                    </div>
+                <div className="background">
+                    <div className="image">
+                
                     {
                             items.map((item) => (
                                 // <Card style={{ width: '18rem' }}>
-                                //     <Card.Header>{item.Name}</Card.Header>
-                                //     <ListGroup variant="flush">
-                                //         <ListGroup.Item>{item.Team}</ListGroup.Item>
-                                //         <ListGroup.Item>{item.Position}</ListGroup.Item>
-                                //         <ListGroup.Item>{item.FantasyPointsDraftKings}</ListGroup.Item>
+                                //     <Card.Img variant="top" src={item.WikipediaLogoUrl} height="200px" />
+                                //     <Card.Body>
+                                //         <Card.Title>{item.City}{item.Name}</Card.Title>
+                                //     </Card.Body>
+                                //     <ListGroup className="list-group-flush">
+                                //         <ListGroupItem>{item.League}</ListGroupItem>
+                                //         <ListGroupItem>{item.Division}</ListGroupItem>
                                 //     </ListGroup>
+                                    
                                 // </Card>
-                                <div>
-                                <p></p> 
+
                                 <Table striped bordered hover variant="dark">
                                     <thead>
                                         <tr>
                                             <th>Name</th>
                                             <th>Team</th>
                                             <th>Position</th>
-                                            <th>Fantasy Points 2019</th>
+                                            <th>Average Draft Position 2020</th>
+                                            <th>Fantasy Point Projections 2020</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -113,6 +86,7 @@ class Stats extends React.Component{
                                             <td role="gridcell">{item.Name}</td>
                                             <td role="gridcell">{item.Team}</td>
                                             <td role="gridcell">{item.Position}</td>
+                                            <td role="gridcell">{item.AverageDraftPosition}</td>
                                             <td className="k-sorted" role="gridcell">
                                                 {item.FantasyPoints}
                                             </td>
@@ -120,13 +94,12 @@ class Stats extends React.Component{
                                         
                                     </tbody>
                                 </Table>
-                                </div>
                                 
                             ))
                             
                     }
                     
-                        
+                    </div>    
 
                 </div>
                 
@@ -136,4 +109,4 @@ class Stats extends React.Component{
     }
 }
 
-export default Stats
+export default Adp

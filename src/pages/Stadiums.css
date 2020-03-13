@@ -1,0 +1,15 @@
+.background {
+    background-color: antiquewhite;
+}
+
+.image {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card {
+    
+    margin-bottom: 15px;
+}
