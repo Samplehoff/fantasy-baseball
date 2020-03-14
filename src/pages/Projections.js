@@ -3,7 +3,7 @@ import {Card, ListGroup, ListGroupItem} from 'react-bootstrap'
 import './Projections.css'
 
 
-class Stats extends React.Component{
+class Projections extends React.Component{
     constructor(props){
         super(props);
         this.state = {

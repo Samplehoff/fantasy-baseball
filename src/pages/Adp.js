@@ -1,6 +1,6 @@
 import React from 'react';
-import {Table} from 'react-bootstrap'
-import './Adp.css'
+import {Card, ListGroup, ListGroupItem} from 'react-bootstrap'
+import './Stats.css'
 
 
 class Adp extends React.Component{
@@ -9,7 +9,8 @@ class Adp extends React.Component{
         this.state = {
             error: null,
             isLoaded: false,
-            items: []
+            items: [],
+            players: []
         }
     }
 
@@ -17,89 +18,105 @@ class Adp extends React.Component{
         this.functionAdp();
     }
 
-    findTeams = () => {
+    findAdp = () => {
         this.setState({
             isLoaded: false
         })
-        this.functionAdp()
+        this.functionStats()
     }
 
     functionAdp() {
+
+        let playerStats = [];
         fetch("https://api.sportsdata.io/v3/mlb/projections/json/PlayerSeasonProjectionStats/2020?key=5934312643214e288126a5db02650611")
         .then(res => res.json())
         .then(
             (info) => {
-                console.log(info)
-
-                this.setState({
-                    isLoaded: true,
-                    items: info
-                })
+                //console.log(info)
+                playerStats = info;
             },
             (error) => {
                 this.setState({
+                    ...this.state,
                     isLoaded: true,
-                    error
+                    error: true
                 })
             }
+        ).then(
+            fetch("https://api.sportsdata.io/v3/mlb/scores/json/Players?key=5934312643214e288126a5db02650611")
+            .then(res => res.json())
+            .then(
+                (pics) => {
+                    //console.log(pics)
+                    let newState = {
+                        ...this.state,
+                        isLoaded: true,
+                        items: playerStats,
+                        players: pics,
+                    }
+                    
+                    this.setState(newState)
+                } 
+            )
         )
     }
 
+    render2() {
+        const {error, isLoaded, items, players} = this.state;
+        items.map(item => {
+            let playerId = item.PlayerID;
+            let myplayer = players.find(element => element.PlayerID === playerId)
+            console.log(myplayer.PlayerID + " " + myplayer.PhotoUrl)
+        })
+        return <div>Hello</div>
+        
+    }
+
     render() {
-        const {error, isLoaded, items} = this.state;
-            
+        const {error, isLoaded, items, players} = this.state;
+        //let myplayer = players.find(element => element.PlayerID === 10000001)
+        //console.log(myplayer.PhotoUrl)
+        // console.log(myplayer)
+        // console.log(players)
+        // console.log(items)  
+       
         if(error) {
             return <div>Error...</div>
         }else if(!isLoaded) {
             return <div>Loading...</div>
         }else {
             return (
-                <div className="background">
-                    <div className="image">
-                
+                <div className="image">
                     {
                             items.map((item) => (
-                                // <Card style={{ width: '18rem' }}>
-                                //     <Card.Img variant="top" src={item.WikipediaLogoUrl} height="200px" />
-                                //     <Card.Body>
-                                //         <Card.Title>{item.City}{item.Name}</Card.Title>
-                                //     </Card.Body>
-                                //     <ListGroup className="list-group-flush">
-                                //         <ListGroupItem>{item.League}</ListGroupItem>
-                                //         <ListGroupItem>{item.Division}</ListGroupItem>
-                                //     </ListGroup>
-                                    
-                                // </Card>
+                                
+                                <Card style={{ width: '18rem' }}>
+                                    <Card.Img variant="top" src={ players.find(element => element.PlayerID === item.PlayerID).PhotoUrl} width="25px" height="200px" />
+                                    <Card.Body>
+                                        <Card.Title>{item.Name}</Card.Title>
+                                            <Card.Text>
+                                                Team: {item.Team}, Position: {item.Position}
 
-                                <Table striped bordered hover variant="dark">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Team</th>
-                                            <th>Position</th>
-                                            <th>Average Draft Position 2020</th>
-                                            <th>Fantasy Point Projections 2020</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td role="gridcell">{item.Name}</td>
-                                            <td role="gridcell">{item.Team}</td>
-                                            <td role="gridcell">{item.Position}</td>
-                                            <td role="gridcell">{item.AverageDraftPosition}</td>
-                                            <td className="k-sorted" role="gridcell">
-                                                {item.FantasyPoints}
-                                            </td>
-                                        </tr>
+                                            </Card.Text>
+                                    </Card.Body>
+                                    <ListGroup className="list-group-flush">
+                                        <ListGroupItem>2020 Average Draft Position: {item.AverageDraftPosition}</ListGroupItem>
+                                        <ListGroupItem>2020 Projected Points: {item.FantasyPoints}</ListGroupItem>
+                                        <ListGroupItem>2020 Projected FanDuel: {item.FantasyPointsFanDuel}</ListGroupItem>
+                                        <ListGroupItem>2020 Projected DraftKings: {item.FantasyPointsDraftKings}</ListGroupItem>
+                                        <ListGroupItem>2020 Projected Yahoo: {item.FantasyPointsYahoo}</ListGroupItem>
                                         
-                                    </tbody>
-                                </Table>
+                                    </ListGroup>
+  
+                                </Card>
+
+                                
                                 
                             ))
                             
                     }
                     
-                    </div>    
+                        
 
                 </div>
                 
