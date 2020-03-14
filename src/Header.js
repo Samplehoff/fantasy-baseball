@@ -12,9 +12,11 @@ class Header extends React.Component {
                             <Nav className="mr-auto">
                                 <Nav.Link href="/stats">2019 Stats</Nav.Link>
                                 <Nav.Link href="/projections">2020 Projections</Nav.Link>
+                                <Nav.Link href="/home">Home</Nav.Link>
+                                <Nav.Link href="/away">Away</Nav.Link>
                                 <Nav.Link href="/adp">Draft</Nav.Link>
                                 <Nav.Link href="/teams">Teams</Nav.Link>
-                                <Nav.Link href="/stadiums">Stadiums</Nav.Link>
+                                
                             </Nav>
                             
                             {/* <Form inline>

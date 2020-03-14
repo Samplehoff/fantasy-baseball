@@ -95,16 +95,17 @@ class Stats extends React.Component{
                                     <Card.Body>
                                         <Card.Title>{item.Name}</Card.Title>
                                             <Card.Text>
-                                                Team: {item.Team}, Position: {item.Position},
+                                                Team: {item.Team}, Position: {item.Position}
 
                                             </Card.Text>
                                     </Card.Body>
                                     <ListGroup className="list-group-flush">
-                                        <ListGroupItem>Hits: {item.Hits}</ListGroupItem>
-                                        <ListGroupItem>HR: {item.HomeRuns}</ListGroupItem>
-                                        <ListGroupItem>RBIs: {item.RunsBattedIn}</ListGroupItem>
-                                        <ListGroupItem>Strike Outs: {item.Strikeouts}</ListGroupItem>
-                                        <ListGroupItem>Walks: {item.Walks}</ListGroupItem>
+                                        <ListGroupItem>Hitting Stats |   Pitching Stats</ListGroupItem>
+                                        <ListGroupItem>Hits: {item.Hits} |  Wins: {item.Wins}</ListGroupItem>
+                                        <ListGroupItem>HR: {item.HomeRuns} | Losses: {item.Losses}</ListGroupItem>
+                                        <ListGroupItem>RBIs: {item.RunsBattedIn} | ERA: {item.EarnedRunAverage}</ListGroupItem>
+                                        <ListGroupItem>Strike Outs: {item.Strikeouts} | K's: {item.PitchingStrikeouts}</ListGroupItem>
+                                        <ListGroupItem>Walks: {item.Walks} | Walks: {item.PitchingWalks}</ListGroupItem>
                                         <ListGroupItem>2019 Fantasy Points: {item.FantasyPoints}</ListGroupItem>
                                     </ListGroup>
   
