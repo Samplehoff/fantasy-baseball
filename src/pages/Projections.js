@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, ListGroup, ListGroupItem} from 'react-bootstrap'
+import {Card, ListGroup, ListGroupItem, Button} from 'react-bootstrap'
 import './Projections.css'
 
 
@@ -18,12 +18,7 @@ class Projections extends React.Component{
         this.functionProjections();
     }
 
-    findProjections = () => {
-        this.setState({
-            isLoaded: false
-        })
-        this.functionProjections()
-    }
+    
 
     functionProjections() {
 
@@ -66,7 +61,8 @@ class Projections extends React.Component{
         items.map(item => {
             let playerId = item.PlayerID;
             let myplayer = players.find(element => element.PlayerID === playerId)
-            console.log(myplayer.PlayerID + " " + myplayer.PhotoUrl)
+
+            console.log(myplayer.PlayerID + " " + myplayer.PhotoUrl + "" + myplayer.PositionCatagory)
         })
         return <div>Hello</div>
         
@@ -89,28 +85,29 @@ class Projections extends React.Component{
                 <div className="image">
                     {
                             items.map((item) => (
-                                
-                                <Card style={{ width: '18rem' }}>
-                                    <Card.Img variant="top" src={ players.find(element => element.PlayerID === item.PlayerID).PhotoUrl} width="25px" height="200px" />
-                                    <Card.Body>
-                                        <Card.Title>{item.Name}</Card.Title>
-                                            <Card.Text>
-                                                Team: {item.Team}, Position: {item.Position}
+                               
+                                    
+                                    <Card style={{ width: '18rem' }}>
+                                        <Card.Img variant="top" src={ players.find(element => element.PlayerID === item.PlayerID).PhotoUrl} width="25px" height="200px" />
+                                        <Card.Body>
+                                            <Card.Title>{item.Name}</Card.Title>
+                                                <Card.Text>
+                                                    Team: {item.Team}, Position: {item.Position}
 
-                                            </Card.Text>
-                                    </Card.Body>
-                                    <ListGroup className="list-group-flush">
-                                        <ListGroupItem>Hitting Stats |   Pitching Stats</ListGroupItem>
-                                        <ListGroupItem>Hits: {item.Hits} |  Wins: {item.Wins}</ListGroupItem>
-                                        <ListGroupItem>HR: {item.HomeRuns} | Losses: {item.Losses}</ListGroupItem>
-                                        <ListGroupItem>RBIs: {item.RunsBattedIn} | ERA: {item.EarnedRunAverage}</ListGroupItem>
-                                        <ListGroupItem>Strike Outs: {item.Strikeouts} | K's: {item.PitchingStrikeouts}</ListGroupItem>
-                                        <ListGroupItem>Walks: {item.Walks} | Walks: {item.PitchingWalks}</ListGroupItem>
-                                        <ListGroupItem>2019 Fantasy Points: {item.FantasyPoints}</ListGroupItem>
-                                    </ListGroup>
+                                                </Card.Text>
+                                        </Card.Body>
+                                        <ListGroup className="list-group-flush">
+                                            <ListGroupItem>Hitting Stats |   Pitching Stats</ListGroupItem>
+                                            <ListGroupItem>Hits: {item.Hits} |  Wins: {item.Wins}</ListGroupItem>
+                                            <ListGroupItem>HR: {item.HomeRuns} | Losses: {item.Losses}</ListGroupItem>
+                                            <ListGroupItem>RBIs: {item.RunsBattedIn} | ERA: {item.EarnedRunAverage}</ListGroupItem>
+                                            <ListGroupItem>Strike Outs: {item.Strikeouts} | K's: {item.PitchingStrikeouts}</ListGroupItem>
+                                            <ListGroupItem>Walks: {item.Walks} | Walks: {item.PitchingWalks}</ListGroupItem>
+                                            <ListGroupItem>2019 Fantasy Points: {item.FantasyPoints}</ListGroupItem>
+                                        </ListGroup>
   
-                                </Card>
-
+                                    </Card>
+                                
                                 
                                 
                             ))
