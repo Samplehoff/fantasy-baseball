@@ -9,7 +9,8 @@ class Teams extends React.Component{
         this.state = {
             error: null,
             isLoaded: false,
-            items: []
+            items: [],
+            teams: []
         }
     }
 
@@ -25,79 +26,94 @@ class Teams extends React.Component{
     }
 
     functionTeams() {
-        fetch("https://api.sportsdata.io/v3/mlb/stats/json/teams?key=5934312643214e288126a5db02650611")
+
+        let teamStats = [];
+        fetch("https://api.sportsdata.io/v3/mlb/scores/json/TeamSeasonStats/2019?key=5934312643214e288126a5db02650611")
         .then(res => res.json())
         .then(
             (info) => {
-                console.log(info)
-
-                this.setState({
-                    isLoaded: true,
-                    items: info
-                })
+                //console.log(info)
+                teamStats = info;
             },
             (error) => {
                 this.setState({
+                    ...this.state,
                     isLoaded: true,
-                    error
+                    error: true
                 })
             }
+        ).then(
+            fetch("https://api.sportsdata.io/v3/mlb/scores/json/teams?key=5934312643214e288126a5db02650611")
+            .then(res => res.json())
+            .then(
+                (pics) => {
+                    //console.log(pics)
+                    let newState = {
+                        ...this.state,
+                        isLoaded: true,
+                        items: teamStats,
+                        teams: pics,
+                    }
+                    
+                    this.setState(newState)
+                } 
+            )
         )
     }
 
+    render2() {
+        const {error, isLoaded, items, teams} = this.state;
+        items.map(item => {
+            let teamId = item.TeamID;
+            let myteam = teams.find(element => element.TeamID === teamId)
+            console.log(myteam.TeamID + " " + myteam.WikipediaLogoUrl)
+        })
+        return <div>Hello</div>
+        
+    }
+
     render() {
-        const {error, isLoaded, items} = this.state;
-            
+        const {error, isLoaded, items, teams} = this.state;
+        //let myplayer = players.find(element => element.PlayerID === 10000001)
+        //console.log(myplayer.PhotoUrl)
+        // console.log(myplayer)
+        // console.log(players)
+        // console.log(items)  
+       
         if(error) {
             return <div>Error...</div>
         }else if(!isLoaded) {
             return <div>Loading...</div>
         }else {
             return (
-                <div className="background">
-                    <div className="image">
-                
+                <div className="image">
                     {
                             items.map((item) => (
+                                
                                 <Card style={{ width: '18rem' }}>
-                                    <Card.Img variant="top" src={item.WikipediaLogoUrl} height="200px" />
+                                    <Card.Img variant="top" src={ teams.find(element => element.TeamID === item.TeamID).WikipediaLogoUrl} height="200px" />
                                     <Card.Body>
-                                        <Card.Title>{item.City}{item.Name}</Card.Title>
+                                        <Card.Title>{item.Name}</Card.Title>
+                                            
                                     </Card.Body>
                                     <ListGroup className="list-group-flush">
-                                        <ListGroupItem>{item.League}</ListGroupItem>
-                                        <ListGroupItem>{item.Division}</ListGroupItem>
+                                        <ListGroupItem>Hitting Stats |   Pitching Stats</ListGroupItem>
+                                        <ListGroupItem>Hits: {item.Hits} |  Hits Given: {item.PitchingHits}</ListGroupItem>
+                                        <ListGroupItem>HR: {item.HomeRuns} | HR Given Up: {item.PitchingHomeRuns}</ListGroupItem>
+                                        <ListGroupItem>RBIs: {item.RunsBattedIn} | ERA: {item.EarnedRunAverage}</ListGroupItem>
+                                        <ListGroupItem>Strike Outs: {item.Strikeouts} | K's: {item.PitchingStrikeouts}</ListGroupItem>
+                                        <ListGroupItem>Walks: {item.Walks} | Walks: {item.PitchingWalks}</ListGroupItem>
                                     </ListGroup>
-                                    
+  
                                 </Card>
 
-                                // <Table striped bordered hover variant="dark">
-                                //     <thead>
-                                //         <tr>
-                                //             <th>Name</th>
-                                //             <th>Team</th>
-                                //             <th>Position</th>
-                                //             <th>Fantasy Points 2019</th>
-                                //         </tr>
-                                //     </thead>
-                                //     <tbody>
-                                //         <tr>
-                                //             <td role="gridcell">{item.Name}</td>
-                                //             <td role="gridcell">{item.Team}</td>
-                                //             <td role="gridcell">{item.Position}</td>
-                                //             <td className="k-sorted" role="gridcell">
-                                //                 {item.FantasyPoints}
-                                //             </td>
-                                //         </tr>
-                                        
-                                //     </tbody>
-                                // </Table>
+                                
                                 
                             ))
                             
                     }
                     
-                    </div>    
+                        
 
                 </div>
                 

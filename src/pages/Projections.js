@@ -18,7 +18,7 @@ class Projections extends React.Component{
         this.functionProjections();
     }
 
-    findStats = () => {
+    findProjections = () => {
         this.setState({
             isLoaded: false
         })
