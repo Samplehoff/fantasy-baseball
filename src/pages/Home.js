@@ -2,15 +2,20 @@ import React from 'react';
 import './Home.css'
 //import Form from 'react-bootstrap/Form'
 //import Button from 'react-bootstrap/Button'
-import Login from './Login'
+// import Login from './Login'
+// import Signup from './Signup'
 
 class Home extends React.Component {
     render () {
         return (
             <div className="background-image">
-                {/* <p>Fantasy Baseball Research</p>
-                <p>Get and edge on the Competition!</p> */}
-                <Login/>
+                <br/>
+                <br/>
+                <br/>
+                <p>Fantasy Baseball Research</p>
+                <p>Get and Edge on the Competition!</p>
+                
+                
             </div>    
         );
     }

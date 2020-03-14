@@ -1,4 +1,4 @@
-.background-image {
+.background {
     background: url("https://media.9news.com/assets/KUSA/images/06d2856a-197e-44b2-868c-2460a1d4d3a6/06d2856a-197e-44b2-868c-2460a1d4d3a6_1140x641.jpg");
     background-color: #cccccc;
     height: 950px;
@@ -7,10 +7,4 @@
     background-size: cover;
     
     
-}
-
-.background-image p {
-    font-size: 75px;
-    color: seashell;
-    text-align: center;
 }

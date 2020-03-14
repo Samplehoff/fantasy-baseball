@@ -58,6 +58,7 @@ class Stats extends React.Component{
                     this.setState(newState)
                 } 
             )
+            
         )
     }
 
@@ -87,6 +88,8 @@ class Stats extends React.Component{
         }else {
             return (
                 <div className="image">
+                    
+                    
                     {
                             items.map((item) => (
                                 
@@ -116,6 +119,7 @@ class Stats extends React.Component{
                             ))
                             
                     }
+                    
                     
                         
 

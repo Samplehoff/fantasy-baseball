@@ -1,10 +1,11 @@
 import React from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBInput } from 'mdbreact';
-import './Login.css'
+//import './Login.css'
+import './Signup.css'
 
-const Login = () => {
+const Signup = () => {
   return (
-    <div className="background">
+      <div className="background">
     <MDBContainer>
       <MDBRow>
         <MDBCol md="6">
@@ -12,7 +13,7 @@ const Login = () => {
             <div className="header pt-3 grey lighten-2">
               <MDBRow className="d-flex justify-content-start">
                 <h3 className="deep-grey-text mt-3 mb-4 pb-1 mx-5">
-                  Log in
+                  Sign up
                 </h3>
               </MDBRow>
             </div>
@@ -40,16 +41,16 @@ const Login = () => {
                   type="button"
                   className="btn-block z-depth-2"
                 >
-                  Log in
+                  Sign up
                 </MDBBtn>
               </div>
               <p className="font-small grey-text d-flex justify-content-center">
-                Don't have an account?
+                Already Have an Account?
                 <a
-                  href="/signup"
+                  href="/login"
                   className="dark-grey-text font-weight-bold ml-1"
                 >
-                  Sign up
+                  Log In
                 </a>
               </p>
             </MDBCardBody>
@@ -61,4 +62,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
