@@ -1,13 +1,13 @@
 import React from 'react';
 import {Navbar, Nav} from 'react-bootstrap'
 //import Login from './pages/Login'
-//import './Header.css';
+import './Header.css';
 
 class Header extends React.Component {
     render() { 
         return (
                 <div>
-                    <Navbar bg="dark" variant="dark" fixed="top">
+                    <Navbar bg="dark" variant="dark">
                         <Navbar.Brand href="/">Fantasy Research</Navbar.Brand>
                             <Nav className="mr-auto">
                                 <Nav.Link href="/stats">2019 Stats</Nav.Link>
