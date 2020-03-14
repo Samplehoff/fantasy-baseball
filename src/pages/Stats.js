@@ -1,6 +1,6 @@
 import React from 'react';
-import {Table} from 'react-bootstrap'
-
+import {Card, ListGroup, ListGroupItem} from 'react-bootstrap'
+import './Stats.css'
 
 
 class Stats extends React.Component{
@@ -26,21 +26,20 @@ class Stats extends React.Component{
     }
 
     functionStats() {
-        fetch("https://api.sportsdata.io/v3/mlb/stats/json/PlayerSeasonStats/2019?key=5934312643214e288126a5db02650611")
+
+        let playerStats = [];
+        fetch("https://api.sportsdata.io/v3/mlb/projections/json/PlayerSeasonProjectionStats/2019?key=5934312643214e288126a5db02650611")
         .then(res => res.json())
         .then(
             (info) => {
-                console.log(info)
-
-                this.setState({
-                    isLoaded: true,
-                    items: info
-                })
+                //console.log(info)
+                playerStats = info;
             },
             (error) => {
                 this.setState({
+                    ...this.state,
                     isLoaded: true,
-                    error
+                    error: true
                 })
             }
         ).then(
@@ -48,79 +47,70 @@ class Stats extends React.Component{
             .then(res => res.json())
             .then(
                 (pics) => {
-                    console.log(pics)
-                    this.setState({
+                    //console.log(pics)
+                    let newState = {
+                        ...this.state,
                         isLoaded: true,
-                        players: pics
-                    })
+                        items: playerStats,
+                        players: pics,
+                    }
+                    
+                    this.setState(newState)
                 } 
             )
         )
     }
 
-    render() {
+    render2() {
         const {error, isLoaded, items, players} = this.state;
         items.map(item => {
             let playerId = item.PlayerID;
             let myplayer = players.find(element => element.PlayerID === playerId)
-            console.log(Object.keys(playerId))
+            console.log(myplayer.PlayerID + " " + myplayer.PhotoUrl)
         })
         return <div>Hello</div>
         
     }
 
-    render2() {
+    render() {
         const {error, isLoaded, items, players} = this.state;
-        let myplayer = players.find(element => element.PlayerID === 10000001)
+        //let myplayer = players.find(element => element.PlayerID === 10000001)
         //console.log(myplayer.PhotoUrl)
-        console.log(myplayer)
-        
-        console.log(players)
-        console.log(items)  
+        // console.log(myplayer)
+        // console.log(players)
+        // console.log(items)  
+       
         if(error) {
             return <div>Error...</div>
         }else if(!isLoaded) {
             return <div>Loading...</div>
         }else {
             return (
-                <div>
-                    <div>
-                    <p>{JSON.stringify(myplayer)}</p>
-                    </div>
+                <div className="image">
                     {
                             items.map((item) => (
-                                // <Card style={{ width: '18rem' }}>
-                                //     <Card.Header>{item.Name}</Card.Header>
-                                //     <ListGroup variant="flush">
-                                //         <ListGroup.Item>{item.Team}</ListGroup.Item>
-                                //         <ListGroup.Item>{item.Position}</ListGroup.Item>
-                                //         <ListGroup.Item>{item.FantasyPointsDraftKings}</ListGroup.Item>
-                                //     </ListGroup>
-                                // </Card>
-                                <div>
-                                <p></p> 
-                                <Table striped bordered hover variant="dark">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Team</th>
-                                            <th>Position</th>
-                                            <th>Fantasy Points 2019</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td role="gridcell">{item.Name}</td>
-                                            <td role="gridcell">{item.Team}</td>
-                                            <td role="gridcell">{item.Position}</td>
-                                            <td className="k-sorted" role="gridcell">
-                                                {item.FantasyPoints}
-                                            </td>
-                                        </tr>
-                                        
-                                    </tbody>
-                                </Table>
-                                </div>
+                                
+                                <Card style={{ width: '18rem' }}>
+                                    <Card.Img variant="top" src={ players.find(element => element.PlayerID === item.PlayerID).PhotoUrl} width="25px" height="200px" />
+                                    <Card.Body>
+                                        <Card.Title>{item.Name}</Card.Title>
+                                            <Card.Text>
+                                                Team: {item.Team}, Position: {item.Position},
+
+                                            </Card.Text>
+                                    </Card.Body>
+                                    <ListGroup className="list-group-flush">
+                                        <ListGroupItem>Hits: {item.Hits}</ListGroupItem>
+                                        <ListGroupItem>HR: {item.HomeRuns}</ListGroupItem>
+                                        <ListGroupItem>RBIs: {item.RunsBattedIn}</ListGroupItem>
+                                        <ListGroupItem>Strike Outs: {item.Strikeouts}</ListGroupItem>
+                                        <ListGroupItem>Walks: {item.Walks}</ListGroupItem>
+                                        <ListGroupItem>2019 Fantasy Points: {item.FantasyPoints}</ListGroupItem>
+                                    </ListGroup>
+  
+                                </Card>
+
+                                
                                 
                             ))
                             

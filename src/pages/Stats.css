@@ -1,0 +1,15 @@
+.image {
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card {
+
+    background-color: black;
+    color: red;
+    margin: 15px;
+}
+
