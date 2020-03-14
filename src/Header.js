@@ -7,7 +7,7 @@ class Header extends React.Component {
     render() { 
         return (
                 <div>
-                    <Navbar bg="dark" variant="dark">
+                    <Navbar bg="dark" variant="dark" fixed="top">
                         <Navbar.Brand href="/">Fantasy Research</Navbar.Brand>
                             <Nav className="mr-auto">
                                 <Nav.Link href="/stats">2019 Stats</Nav.Link>
