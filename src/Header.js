@@ -4,7 +4,13 @@ import {Navbar, Nav} from 'react-bootstrap'
 import './Header.css';
 
 class Header extends React.Component {
+    logoutUser = () => {
+        localStorage.removeItem('username');
+        window.location.href = '/';
+    }
+    
     render() { 
+        const username = localStorage.getItem('username');
         return (
                 <div>
                     <Navbar bg="dark" variant="dark">
@@ -16,10 +22,12 @@ class Header extends React.Component {
                                 <Nav.Link href="/teams">Teams</Nav.Link>
                                 
                             </Nav>
-                            <Nav inline>
+                            {username ? <Nav inline>
+                                <Nav.Link onClick={this.logoutUser} href="#">Log Out</Nav.Link>
+                            </Nav> : <Nav inline>
                                 <Nav.Link href="/login">Log In</Nav.Link>
                                 <Nav.Link href="/signup">Sign Up</Nav.Link>
-                            </Nav>
+                            </Nav>}
                             {/* <Form inline>
                                 <FormControl type="text" placeholder="Search" className="mr-sm-2" />
                                 <Button variant="outline-info">Search</Button>

@@ -3,24 +3,22 @@ import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBInput } 
 import './Login.css'
 
 const initialState = {
-  username: '',
-  password: ''
+  email: ''
 }
 
-class Login extends Component {
+class ForgetPassword extends Component {
   state = initialState;
 
   loginUser = e => {
     e.preventDefault();
-    fetch('/api/users/login', {
+    fetch('/api/users/forget-password', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(this.state)
     }).then(res => res.json())
-      .then(({ username }) => {
-        localStorage.setItem('username', username);
+      .then(() => {
         this.setState(initialState, () => window.location.href = '/');
       })
       .catch(err => console.log('err creating user', err));
@@ -29,7 +27,7 @@ class Login extends Component {
   handleInputChange = e => this.setState({ [e.target.id]: e.target.value })
 
   render() {
-    const { username, password } = this.state;
+    const { email, password } = this.state;
     return (
       <div className="background">
         <MDBContainer>
@@ -45,26 +43,7 @@ class Login extends Component {
                 </div>
                 <MDBCardBody className="mx-4 mt-4">
                   <form onSubmit={this.loginUser}>
-                    <MDBInput id="username" value={username} onChange={this.handleInputChange} label="Your username" group type="text" validate />
-                    <MDBInput
-                      id="password"
-                      value={password}
-                      onChange={this.handleInputChange}
-                      label="Your password"
-                      group
-                      type="password"
-                      validate
-                      containerClass="mb-0"
-                    />
-                    <p className="font-small grey-text d-flex justify-content-end">
-                      Forgot
-                  <a
-                        href="#!"
-                        className="dark-grey-text font-weight-bold ml-1"
-                      >
-                        Password?
-                  </a>
-                    </p>
+                    <MDBInput id="email" value={email} onChange={this.handleInputChange} label="Your email" group type="text" validate />
                     <div className="text-center mb-4 mt-5">
                       <MDBBtn
                         color="danger"
@@ -94,4 +73,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default ForgetPassword;
