@@ -14,8 +14,13 @@ class Teams extends React.Component{
         }
     }
 
+    // check if User is logged in before loading component
     componentDidMount() {
-        this.functionTeams();
+        if (localStorage.getItem('username')) {
+            this.functionTeams();
+        } else {
+            window.location.href= '/';
+        }
     }
 
     findTeams = () => {
@@ -88,9 +93,8 @@ class Teams extends React.Component{
             return (
                 <div className="image">
                     {
-                            items.map((item) => (
-                                
-                                <Card style={{ width: '18rem' }}>
+                            items.map((item, i) => (
+                                <Card key={i} style={{ width: '18rem' }}>
                                     <Card.Img variant="top" src={ teams.find(element => element.TeamID === item.TeamID).WikipediaLogoUrl} height="200px" />
                                     <Card.Body>
                                         <Card.Title>{item.Name}</Card.Title>

@@ -11,6 +11,7 @@ import Adp from './pages/Adp'
 import Teams from './pages/Teams'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import ForgetPassword from './pages/ForgetPassword' //add forget-password route
 
 //import Navbar from 'react-bootstrap/Navbar';
 //import Footer from './Footer';
@@ -28,6 +29,7 @@ function App() {
       <Route exact path='/teams' component={Teams} />
       <Route exact path='/login' component={Login} />
       <Route exact path='/signup' component={Signup} />
+      <Route exact path='/forget-password' component={ForgetPassword} />
 
       {/* <Footer /> */}
     </BrowserRouter>

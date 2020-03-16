@@ -14,8 +14,13 @@ class Stats extends React.Component{
         }
     }
 
+
     componentDidMount() {
-        this.functionStats();
+        if (localStorage.getItem('username')) {
+            this.functionStats();
+        } else {
+            window.location.href= '/';
+        }
     }
 
     findStats = () => {
@@ -88,12 +93,9 @@ class Stats extends React.Component{
         }else {
             return (
                 <div className="image">
-                    
-                    
                     {
-                            items.map((item) => (
-                                
-                                <Card style={{ width: '18rem' }}>
+                            items.map((item, i) => (
+                                <Card key={i} style={{ width: '18rem' }}>
                                     <Card.Img variant="top" src={ players.find(element => element.PlayerID === item.PlayerID).PhotoUrl} width="25px" height="200px" />
                                     <Card.Body>
                                         <Card.Title>{item.Name}</Card.Title>

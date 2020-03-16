@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBInput } from 'mdbreact';
 import './Login.css'
 
@@ -10,6 +11,7 @@ const initialState = {
 class Login extends Component {
   state = initialState;
 
+  // make request to backend to verify user info
   loginUser = e => {
     e.preventDefault();
     fetch('/api/users/login', {
@@ -58,12 +60,12 @@ class Login extends Component {
                     />
                     <p className="font-small grey-text d-flex justify-content-end">
                       Forgot
-                  <a
-                        href="#!"
+                  <Link
+                        to="/forget-password"
                         className="dark-grey-text font-weight-bold ml-1"
                       >
                         Password?
-                  </a>
+                  </Link>
                     </p>
                     <div className="text-center mb-4 mt-5">
                       <MDBBtn

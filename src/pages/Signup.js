@@ -12,6 +12,7 @@ const initialState = {
 class Signup extends Component {
   state = initialState
 
+  // make request to backend to create user account
   handleSubmit = e => {
     e.preventDefault();
     fetch('/api/users/register', {
