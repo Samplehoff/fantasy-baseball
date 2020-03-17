@@ -13,7 +13,7 @@ class Home extends React.Component {
                 <br/>
                 <br/>
                 <p>Fantasy Baseball Research</p>
-                <p>Get and Edge on the Competition!</p>
+                <p>Get an Edge on the Competition!</p>
                 
                 
             </div>    
