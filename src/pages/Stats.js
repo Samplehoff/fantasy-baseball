@@ -34,6 +34,7 @@ class Stats extends React.Component{
             (info) => {
                 //console.log(info)
                 playerStats = info;
+                
             },
             (error) => {
                 this.setState({
@@ -57,7 +58,9 @@ class Stats extends React.Component{
                     
                     this.setState(newState)
                 } 
+                
             )
+            
             
         )
     }
