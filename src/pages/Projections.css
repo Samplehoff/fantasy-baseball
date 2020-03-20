@@ -12,3 +12,14 @@
     color: red;
     margin: 15px;
 }
+
+.loading3 {
+    background: url('https://media.giphy.com/media/l3sIQqRFmQJfFX9a5e/giphy.gif') no-repeat center center;
+    background-color: black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 9999999;
+}

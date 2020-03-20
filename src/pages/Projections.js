@@ -84,7 +84,7 @@ class Projections extends React.Component{
         if(error) {
             return <div>Error...</div>
         }else if(!isLoaded) {
-            return <div>Loading...</div>
+            return <div className="loading3">Loading...</div>
         }else {
             return (
                 <div className="image">

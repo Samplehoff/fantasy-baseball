@@ -88,7 +88,7 @@ class Teams extends React.Component{
         if(error) {
             return <div>Error...</div>
         }else if(!isLoaded) {
-            return <div>Loading...</div>
+            return <div className="loading">Loading...</div>
         }else {
             return (
                 <div className="image">
