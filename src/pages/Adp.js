@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card, ListGroup, ListGroupItem} from 'react-bootstrap'
-import './Stats.css'
+import './Adp.css'
 
 
 class Adp extends React.Component{

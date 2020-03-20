@@ -12,6 +12,10 @@ class Home extends React.Component {
                 <br/>
                 <br/>
                 <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
                 <p>Fantasy Baseball Research</p>
                 <p>Get an Edge on the Competition!</p>
                 
