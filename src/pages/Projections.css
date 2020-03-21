@@ -13,7 +13,7 @@
     margin: 15px;
 }
 
-/* .loading3 {
+.loading3 {
     background: url('https://media1.giphy.com/media/PeQX1v67y64ww/source.gif') no-repeat center center;
     background-color: black;
     position: absolute;
@@ -22,4 +22,4 @@
     height: 100%;
     width: 100%;
     z-index: 9999999;
-} */
+}
