@@ -95,7 +95,7 @@ class Teams extends React.Component{
                     {
                             items.map((item, i) => (
                                 <Card key={i} style={{ width: '18rem' }}>
-                                    <Card.Img variant="top" src={ teams.find(element => element.TeamID === item.TeamID).WikipediaLogoUrl} height="200px" />
+                                    <Card.Img variant="top" src={ teams.find(element => element.TeamID === item.TeamID).WikipediaWordMarkUrl} height="200px" />
                                     <Card.Body>
                                         <Card.Title>{item.Name}</Card.Title>
                                             
